@@ -3,7 +3,8 @@ import { createStore } from "redux";
 const initialState = {
     name: "",
     email: "",
-    password: ""
+    password: "",
+    isAuthenticated: false
 }
 
 const reducer = (state = initialState, action) => {

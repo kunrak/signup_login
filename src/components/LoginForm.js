@@ -7,7 +7,9 @@ import {
     Stack,
     Button
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const schema = Yup.object().shape({
@@ -24,21 +26,58 @@ function LoginForm() {
     });
     const [errors, setErrors] = useState({});
 
-    const handleFormSubmit = (e) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        schema
-            .validate(values, { abortEarly: false })
-            .then(() => {
-                setErrors({});
-            })
-            .catch((err) => {
-                const newErrors = {};
-                err.inner.forEach((error) => {
-                    newErrors[error.path] = error.message;
-                });
-                setErrors(newErrors);
+        const result = await (await fetch('http://localhost:4000/login', {
+            method: 'POST',
+            credentials: 'include', // Needed to include the cookie
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: values.email,
+                password: values.password,
+            }),
+        })).json();
+
+        if (result.accesstoken) {
+            setValues({
+                accesstoken: result.accesstoken,
             });
+            navigate('/profile');
+        } else {
+            console.log(result.error);
+        }
+
+        // schema
+        //     .validate(values, { abortEarly: false })
+        //     .then(() => {
+        //         setErrors({});
+        //         dispatch({
+        //             type: "LOGIN",
+        //             payload: {
+        //                 name: values.name,
+        //                 email: values.email,
+        //                 password: values.password
+        //             }
+        //         });
+        //         navigate("/profile")
+        //     })
+        //     .catch((err) => {
+        //         const newErrors = {};
+        //         err.inner.forEach((error) => {
+        //             newErrors[error.path] = error.message;
+        //         });
+        //         setErrors(newErrors);
+        //     });
     };
+
+    useEffect(() => {
+        console.log(values)
+    }, [values])
 
     const handleChange = (e) => {
         setValues({
