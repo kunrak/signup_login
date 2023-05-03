@@ -41,7 +41,6 @@ function SignupForm() {
     const handleFormSubmit = async e => {
         e.preventDefault();
 
-        // await schema.validate(values, { abortEarly: false })
         const result = await axios.post("http://localhost:4000/register", {
             email: values.email,
             password: values.password
