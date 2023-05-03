@@ -1,22 +1,14 @@
-// import { Outlet, Navigate } from 'react-router-dom'
-
-// const ProtectedRoutes = () => {
-//     const isAuthenticated = !!localStorage.getItem("myData");
-//     return (
-//         isAuthenticated ? <Outlet /> : <Navigate to="/profile" />
-//     )
-// }
-
-// export default ProtectedRoutes
-
 import { useSelector } from "react-redux"
 import { Navigate, Outlet } from "react-router-dom"
 
-export const ProtectedRoute = ({ redirectPath = "/", children }) => {
+export const ProtectedRoute = ({ children }) => {
     const authentication = useSelector(state => state.isAuthenticated)
-    console.log(authentication)
+    // if (authentication) {
+    //     return children ? children : <Outlet />
+    // } else {
+    //     return <Navigate to="/" replace />
+    // }
     if (!authentication) {
-        return <Navigate to="/" replace />
+        return <Navigate to="/login" />
     }
-    return children ? children : <Outlet />
 }

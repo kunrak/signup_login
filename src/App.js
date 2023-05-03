@@ -39,7 +39,6 @@ function App() {
       <Routes>
         <Route path="/" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
         </Route>

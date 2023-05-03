@@ -54,7 +54,8 @@ function SignupForm() {
                     name: values.name,
                     email: values.email,
                     password: values.password,
-                    isAuthenticated: !values.isAuthenticated
+                    isAuthenticated: true
+                    // isAuthenticated: !values.isAuthenticated
                 }
             });
             localStorage.setItem("myData", JSON.stringify(values));

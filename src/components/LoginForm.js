@@ -34,16 +34,26 @@ function LoginForm() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:4000/login", {
+            const res = await axios.post("http://localhost:4000/login", {
                 email: values.email,
                 password: values.password,
             });
 
-            if (response.data.accesstoken) {
+            if (res.data.accesstoken) {
                 setValues({
-                    accessToken: response.data.accesstoken,
+                    accessToken: res.data.accesstoken,
                 });
                 navigate("/profile");
+                dispatch({
+                    type: "LOGIN",
+                    payload: {
+                        name: values.name,
+                        email: values.email,
+                        password: values.password,
+                        isAuthenticated: true
+                        // isAuthenticated: !values.isAuthenticated
+                    }
+                });
             } else {
                 setErrors({ password: "Incorrect Password" });
             }
