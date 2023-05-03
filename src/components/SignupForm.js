@@ -40,17 +40,8 @@ function SignupForm() {
     };
     const handleFormSubmit = async e => {
         e.preventDefault();
-        // const result = await (await fetch('http://localhost:4000/register', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         email: values.email,
-        //         password: values.password,
-        //     }),
-        // })).json();
 
+        // await schema.validate(values, { abortEarly: false })
         const result = await axios.post("http://localhost:4000/register", {
             email: values.email,
             password: values.password
@@ -79,30 +70,6 @@ function SignupForm() {
             alert(newErrors);
         }
     };
-    // schema
-    //     .validate(values, { abortEarly: false })
-    //     .then(() => {
-    //         setErrors({});
-    //         alert("Form submitted successfully");
-    //         dispatch({
-    //             type: "REGISTER",
-    //             payload: {
-    //                 name: values.name,
-    //                 email: values.email,
-    //                 password: values.password
-    //             }
-    //         });                
-    //         localStorage.setItem("myData", JSON.stringify(values));
-    //         navigate("/login");
-    //     })
-    //     .catch((err) => {
-    //         const newErrors = {};
-    //         err.inner.forEach((error) => {
-    //             newErrors[error.path] = error.message;
-    //         });
-    //         setErrors(newErrors);
-    //     });
-
 
     return (
         <Container maxWidth="sm">
@@ -115,16 +82,6 @@ function SignupForm() {
                     </Box>
                     <form onSubmit={handleFormSubmit}>
                         <Stack spacing={3} width="80%" margin="auto">
-                            {/* <TextField
-                                type="text"
-                                label="Full Name"
-                                id="name"
-                                name="name"
-                                value={values.name}
-                                onChange={handleChange}
-                                error={!!errors.name}
-                                helperText={errors.name}
-                            /> */}
                             <TextField
                                 type="email"
                                 label="Email"

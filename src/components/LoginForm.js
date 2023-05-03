@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import axios from "axios";
+
 
 const schema = Yup.object().shape({
     email: Yup.string().email("Invalid Email").required("Email is required"),
@@ -51,28 +53,6 @@ function LoginForm() {
         } else {
             console.log(result.error);
         }
-
-        // schema
-        //     .validate(values, { abortEarly: false })
-        //     .then(() => {
-        //         setErrors({});
-        //         dispatch({
-        //             type: "LOGIN",
-        //             payload: {
-        //                 name: values.name,
-        //                 email: values.email,
-        //                 password: values.password
-        //             }
-        //         });
-        //         navigate("/profile")
-        //     })
-        //     .catch((err) => {
-        //         const newErrors = {};
-        //         err.inner.forEach((error) => {
-        //             newErrors[error.path] = error.message;
-        //         });
-        //         setErrors(newErrors);
-        //     });
     };
 
     useEffect(() => {
