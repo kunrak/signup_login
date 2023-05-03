@@ -7,6 +7,10 @@ const Profile = () => {
   const users = localStorage.getItem("myData")
   const user = JSON.parse(users)
 
+  const handleClick = () => {
+    localStorage.removeItem("myData")
+  };
+
   return (
     <Container maxWidth="sm">
       <Paper elevation={24} sx={{ mt: 24 }}>
@@ -16,7 +20,7 @@ const Profile = () => {
           <p>{user?.email}</p>
         </Box>
         <Box align="center" pb={2}>
-          <Button variant="contained">
+          <Button variant="contained" onClick={handleClick}>
             <Link href="/" color="#ffffff" underline="none">
               Log Out
             </Link>

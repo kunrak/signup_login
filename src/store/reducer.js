@@ -14,14 +14,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 name: action.name,
                 email: action.email,
-                password: action.password
+                password: action.password,
+                isAuthenticated: true
             }
         case "LOGIN":
             return {
                 ...state,
                 name: action.name,
                 email: action.email,
-                password: action.password
+                password: action.password,
+                isAuthenticated: true
             }
         default:
             return state;

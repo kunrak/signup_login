@@ -39,27 +39,11 @@ function App() {
       <Routes>
         <Route path="/" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/profile" element={<Profile />} />
-        {/* {isAuthenticated
-        {/* {isAuthenticated ?
+        <Route element={<PrivateRoutes />}>
           <Route path="/profile" element={<Profile />} />
-          :
-          <Route path="/login" element={<LoginForm />} />
-        } */}
-        {/* <Route path="/login" element={<LoginForm />} />
-        <Route path="/profile" element={<Profile />} /> */}
+        </Route>
       </Routes>
-      {/* <PrivateRoute
-          path="/profile"
-          element={<Profile /> }
-          isAuthenticated={isAuthenticated}
-          user={user}
-        /> */}
-      {/* <Route path="/profile" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-          <Route path="/" element={<Profile user={user} />} />
-        </Route> */}
-      {/* <PrivateRoute path="/profile" element={<Profile user={user} />} /> */}
-    </BrowserRouter>
+    </BrowserRouter >
 
   );
 }
