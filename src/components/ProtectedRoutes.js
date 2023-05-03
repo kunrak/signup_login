@@ -9,11 +9,14 @@
 
 // export default ProtectedRoutes
 
+import { useSelector } from "react-redux"
 import { Navigate, Outlet } from "react-router-dom"
 
-export const ProtectedRoute = ({ isAllowed, redirectPath = "/login", children }) => {
-    if (!isAllowed) {
-        return <Navigate to={redirectPath} replace />
+export const ProtectedRoute = ({ redirectPath = "/", children }) => {
+    const authentication = useSelector(state => state.isAuthenticated)
+    console.log(authentication)
+    if (!authentication) {
+        return <Navigate to="/" replace />
     }
     return children ? children : <Outlet />
 }
